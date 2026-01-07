@@ -6,7 +6,7 @@
 /*   By: njooris <njooris@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 16:52:23 by njooris           #+#    #+#             */
-/*   Updated: 2026/01/07 15:44:12 by njooris          ###   ########.fr       */
+/*   Updated: 2026/01/07 16:13:41 by njooris          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ Fixed::Fixed(const Fixed &fixed)
 
 Fixed::Fixed(const int fixed_point)
 {
-	this->_fixed_point = fixed_point * (float)(1 << _fractional);
+	this->_fixed_point = fixed_point * (1 << _fractional);
 }
 
 Fixed::Fixed(const float floating_point)
 {
-	this->_fixed_point = roundf((floating_point * (float)(1 << _fractional)));
+	this->_fixed_point = roundf((floating_point * (1 << _fractional)));
 }
 
 Fixed::~Fixed()
@@ -54,19 +54,27 @@ Fixed	Fixed::operator+(const Fixed &fixed)
 
 Fixed	Fixed::operator-(const Fixed &fixed)
 {
-	Fixed ret(this->_fixed_point -= fixed._fixed_point);
+	Fixed ret(this->_fixed_point - fixed._fixed_point);
 	return (ret);
 }
 
 Fixed	Fixed::operator*(const Fixed &fixed)
 {
-	Fixed ret((this->_fixed_point * fixed._fixed_point) / (float)(1 << _fractional));
+	int	res;
+	Fixed ret;
+
+	res = this->_fixed_point * fixed._fixed_point;
+	ret._fixed_point = res / (1 << _fractional);
 	return (ret);
 }
 
 Fixed	Fixed::operator/(const Fixed &fixed)
 {
-	Fixed ret((this->_fixed_point / fixed._fixed_point) * (float)(1 << _fractional));
+	int		res;
+	Fixed	ret;
+
+	res = this->_fixed_point / fixed._fixed_point;
+	ret._fixed_point = res * (1 << _fractional);
 	return (ret);
 }
 
@@ -135,12 +143,12 @@ void Fixed::setRawBits(int const raw)
 float Fixed::toFloat(void) const
 {
 	
-	return (getRawBits()) / (float)(1 << _fractional);
+	return (getRawBits()) / static_cast<float>(1 << _fractional);
 }
 
 int	Fixed::toInt(void) const
 {
-	return (getRawBits() / (float)(1 << _fractional));
+	return (getRawBits() / (1 << _fractional));
 }
 
 const Fixed&	Fixed::min(const Fixed &fixed1, const Fixed &fixed2)
