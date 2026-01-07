@@ -6,7 +6,7 @@
 /*   By: njooris <njooris@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 16:52:23 by njooris           #+#    #+#             */
-/*   Updated: 2026/01/07 16:15:31 by njooris          ###   ########.fr       */
+/*   Updated: 2026/01/07 16:21:14 by njooris          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,21 @@ Fixed&	Fixed::operator=(const Fixed &fixed)
 
 Fixed	Fixed::operator+(const Fixed &fixed)
 {
-	Fixed ret(this->_fixed_point + fixed._fixed_point);
+	int		res;
+	Fixed	ret;
+
+	res = this->_fixed_point + fixed._fixed_point;
+	ret._fixed_point = res / (1 << _fractional);
 	return (ret); 
 }
 
 Fixed	Fixed::operator-(const Fixed &fixed)
 {
-	Fixed ret(this->_fixed_point - fixed._fixed_point);
+	int		res;
+	Fixed	ret;
+
+	res = this->_fixed_point - fixed._fixed_point;
+	ret._fixed_point = res / (1 << _fractional);
 	return (ret);
 }
 
