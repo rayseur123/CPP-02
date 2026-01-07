@@ -6,22 +6,15 @@
 /*   By: njooris <njooris@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 16:52:23 by njooris           #+#    #+#             */
-/*   Updated: 2026/01/05 14:50:23 by njooris          ###   ########.fr       */
+/*   Updated: 2026/01/07 11:56:05 by njooris          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 #include <iostream>
+#include <cmath>
 
 const int	Fixed::_fractional = 8;
-
-float	ft_pow(int base, float exp)
-{
-	float	ret = 1;
-	for (int i = 0; i < exp; i++)
-		ret *= base;
-	return (ret);
-}
 
 Fixed::Fixed() : _fixed_point(0)
 {
@@ -34,12 +27,12 @@ Fixed::Fixed(const Fixed &fixed)
 
 Fixed::Fixed(const int fixed_point)
 {
-	this->_fixed_point = fixed_point << _fractional;
+	this->_fixed_point = fixed_point * (float)(1 << _fractional);
 }
 
 Fixed::Fixed(const float floating_point)
 {
-	this->_fixed_point = static_cast <int>(floating_point * ft_pow(2, _fractional));
+	this->_fixed_point = roundf((floating_point * (float)(1 << _fractional)));
 }
 
 Fixed::~Fixed()
@@ -67,13 +60,13 @@ Fixed&	Fixed::operator-(const Fixed &fixed)
 
 Fixed&	Fixed::operator*(const Fixed &fixed)
 {
-	this->_fixed_point = (this->_fixed_point * fixed._fixed_point) / ft_pow(2, _fractional);
+	this->_fixed_point = (this->_fixed_point * fixed._fixed_point) / (float)(1 << _fractional);
 	return (*this);
 }
 
 Fixed&	Fixed::operator/(const Fixed &fixed)
 {
-	this->_fixed_point = (this->_fixed_point / fixed._fixed_point) * ft_pow(2, _fractional);
+	this->_fixed_point = (this->_fixed_point / fixed._fixed_point) * (float)(1 << _fractional);
 	return (*this);
 }
 
@@ -142,12 +135,12 @@ void Fixed::setRawBits(int const raw)
 float Fixed::toFloat(void) const
 {
 	
-	return (static_cast<float>(getRawBits()) / ft_pow(2, _fractional));
+	return (getRawBits()) / (float)(1 << _fractional);
 }
 
 int	Fixed::toInt(void) const
 {
-	return (getRawBits() / static_cast<int>(ft_pow(2, _fractional)));
+	return (getRawBits() / (float)(1 << _fractional));
 }
 
 const Fixed&	Fixed::min(const Fixed &fixed1, const Fixed &fixed2)
