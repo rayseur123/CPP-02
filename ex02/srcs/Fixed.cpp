@@ -6,7 +6,7 @@
 /*   By: njooris <njooris@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 16:52:23 by njooris           #+#    #+#             */
-/*   Updated: 2025/12/17 15:10:41 by njooris          ###   ########.fr       */
+/*   Updated: 2026/01/05 14:50:23 by njooris          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ Fixed&	Fixed::operator/(const Fixed &fixed)
 	return (*this);
 }
 
-Fixed	&Fixed::operator++()
+Fixed&	Fixed::operator++()
 {
 	_fixed_point++;
 	return (*this);
@@ -90,7 +90,7 @@ Fixed	Fixed::operator++(int)
 	return (fixed);
 }
 
-Fixed	&Fixed::operator--()
+Fixed&	Fixed::operator--()
 {
 	_fixed_point--;
 	return (*this);
@@ -150,28 +150,28 @@ int	Fixed::toInt(void) const
 	return (getRawBits() / static_cast<int>(ft_pow(2, _fractional)));
 }
 
-const Fixed &Fixed::min(const Fixed &fixed1, const Fixed &fixed2)
+const Fixed&	Fixed::min(const Fixed &fixed1, const Fixed &fixed2)
 {
 	if (fixed1 < fixed2)
 		return (fixed1);
 	return (fixed2);
 }
 
-Fixed &Fixed::min(Fixed &fixed1, Fixed &fixed2)
+Fixed&	Fixed::min(Fixed &fixed1, Fixed &fixed2)
 {
 	if (fixed1 < fixed2)
 		return (fixed1);
 	return (fixed2);
 }
 
-const Fixed &Fixed::max(const Fixed &fixed1, const Fixed &fixed2)
+const Fixed&	Fixed::max(const Fixed &fixed1, const Fixed &fixed2)
 {
 	if (fixed1 > fixed2)
 		return (fixed1);
 	return (fixed2);
 }
 
-Fixed &Fixed::max(Fixed &fixed1, Fixed &fixed2)
+Fixed&	Fixed::max(Fixed &fixed1, Fixed &fixed2)
 {
 	if (fixed1 > fixed2)
 		return (fixed1);

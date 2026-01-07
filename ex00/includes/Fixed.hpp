@@ -6,9 +6,12 @@
 /*   By: njooris <njooris@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 16:28:33 by njooris           #+#    #+#             */
-/*   Updated: 2025/12/17 13:08:21 by njooris          ###   ########.fr       */
+/*   Updated: 2026/01/07 10:41:48 by njooris          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef FIXED_HPP
+#define FIXED_HPP
 
 class Fixed
 {
@@ -25,3 +28,5 @@ class Fixed
 		int getRawBits(void) const;
 		void setRawBits(int const raw);
 };
+
+#endif
