@@ -6,7 +6,7 @@
 /*   By: njooris <njooris@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 16:52:23 by njooris           #+#    #+#             */
-/*   Updated: 2026/01/07 11:56:05 by njooris          ###   ########.fr       */
+/*   Updated: 2026/01/07 15:44:12 by njooris          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,28 +46,28 @@ Fixed&	Fixed::operator=(const Fixed &fixed)
 	return (*this);
 }
 
-Fixed&	Fixed::operator+(const Fixed &fixed)
+Fixed	Fixed::operator+(const Fixed &fixed)
 {
-	this->_fixed_point += fixed._fixed_point;
-	return (*this); 
+	Fixed ret(this->_fixed_point + fixed._fixed_point);
+	return (ret); 
 }
 
-Fixed&	Fixed::operator-(const Fixed &fixed)
+Fixed	Fixed::operator-(const Fixed &fixed)
 {
-	this->_fixed_point -= fixed._fixed_point;
-	return (*this);
+	Fixed ret(this->_fixed_point -= fixed._fixed_point);
+	return (ret);
 }
 
-Fixed&	Fixed::operator*(const Fixed &fixed)
+Fixed	Fixed::operator*(const Fixed &fixed)
 {
-	this->_fixed_point = (this->_fixed_point * fixed._fixed_point) / (float)(1 << _fractional);
-	return (*this);
+	Fixed ret((this->_fixed_point * fixed._fixed_point) / (float)(1 << _fractional));
+	return (ret);
 }
 
-Fixed&	Fixed::operator/(const Fixed &fixed)
+Fixed	Fixed::operator/(const Fixed &fixed)
 {
-	this->_fixed_point = (this->_fixed_point / fixed._fixed_point) * (float)(1 << _fractional);
-	return (*this);
+	Fixed ret((this->_fixed_point / fixed._fixed_point) * (float)(1 << _fractional));
+	return (ret);
 }
 
 Fixed&	Fixed::operator++()
